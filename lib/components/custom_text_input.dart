@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hungryyy/utilities/constants.dart';
+import 'package:complain_me/utilities/constants.dart';
 
 class CustomTextInput extends StatelessWidget {
 
@@ -8,7 +8,7 @@ class CustomTextInput extends StatelessWidget {
   final bool isPasswordField;
   final TextInputType textInputType;
   final TextEditingController controller;
-  CustomTextInput({@required this.label,this.icon,@required this.hint,@required this.isPasswordField,@required this.textInputType,@required this.controller});
+  CustomTextInput({required this.label,required this.icon,required this.hint,required this.isPasswordField,required this.textInputType,required this.controller});
 
   @override
   Widget build(BuildContext context) {

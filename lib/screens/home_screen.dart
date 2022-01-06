@@ -1,6 +1,6 @@
+import 'package:complain_me/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 
 class HomeScreen extends StatefulWidget {
   static final String id = 'home_screen';
@@ -9,11 +9,10 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 
   final int currentIndex;
-  HomeScreen({@required this.currentIndex});
+  HomeScreen({required this.currentIndex});
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
@@ -22,14 +21,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    if(isDrawerOpen){
+    if (isDrawerOpen) {
       xOffset = MediaQuery.of(context).size.width * .6;
-      yOffset = MediaQuery.of(context).size.height*.33;
-      rotationAngle = -20*3.14/180;
+      yOffset = MediaQuery.of(context).size.height * .33;
+      rotationAngle = -20 * 3.14 / 180;
       scaleFactor = 0.6;
       isDrawerOpen = true;
-    }else{
+    } else {
       xOffset = 0;
       yOffset = 0;
       rotationAngle = 0;
@@ -37,31 +35,33 @@ class _HomeScreenState extends State<HomeScreen> {
       isDrawerOpen = false;
     }
 
-    Widget iconButton = !isDrawerOpen ? IconButton(
-      onPressed: (){
-        setState(() {
-          isDrawerOpen = true;
-        });
-      },
-      padding: EdgeInsets.all(10),
-      icon: Icon(
-        Icons.restaurant_menu,
-        color: kColorBlack,
-      ),
-    ) : IconButton(
-      onPressed: (){
-        setState(() {
-          isDrawerOpen = false;
-        });
-      },
-      padding: EdgeInsets.all(10),
-      icon: Icon(
-        Icons.arrow_back_ios,
-        color: kColorBlack,
-      ),
-    );
+    Widget iconButton = !isDrawerOpen
+        ? IconButton(
+            onPressed: () {
+              setState(() {
+                isDrawerOpen = true;
+              });
+            },
+            padding: EdgeInsets.all(10),
+            icon: Icon(
+              Icons.restaurant_menu,
+              color: kColorBlack,
+            ),
+          )
+        : IconButton(
+            onPressed: () {
+              setState(() {
+                isDrawerOpen = false;
+              });
+            },
+            padding: EdgeInsets.all(10),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: kColorBlack,
+            ),
+          );
 
-    List<Widget> displayPages = [
+/*     List<Widget> displayPages = [
       SearchPage(
         iconButton: iconButton,
       ),
@@ -108,5 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }*/
   }
 }

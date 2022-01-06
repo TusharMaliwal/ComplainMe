@@ -3,7 +3,7 @@ import 'package:complain_me/utilities/constants.dart';
 
 class ComplainMeLogo extends StatelessWidget {
   const ComplainMeLogo({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

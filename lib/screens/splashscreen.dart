@@ -1,14 +1,17 @@
 import 'dart:convert';
 
 import 'package:complain_me/components/alert_box.dart';
-import 'package:complain_me/screens/details_screem.dart';
+import 'package:complain_me/screens/login_screen.dart';
 import 'package:complain_me/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:complain_me/components/complain_me_logo.dart';
 import 'package:complain_me/utilities/constants.dart';
 import 'package:complain_me/utilities/user_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:http/http.dart' as http;
+
+import 'details_screen.dart';
 
 
 
@@ -16,14 +19,16 @@ class SplashScreen extends StatefulWidget {
 
   static const String id = 'splashscreen';
 
+  SplashScreen({Key? key}) : super(key: key);
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  String loginState;
-  String email;
+  late String loginState;
+  late String email;
   UserApi userApi = UserApi.instance;
 
   Future<void> loadUserDetails() async {
@@ -78,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       loginState = prefs.getString('login_status') ?? 'NO';
-      email = prefs.getString('login_email') ?? null;
+      email = (prefs.getString('login_email') ?? null)!;
     });
     if(loginState == 'NO'){
       Navigator.pushReplacementNamed(context,LoginScreen.id);
