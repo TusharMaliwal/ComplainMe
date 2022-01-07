@@ -11,8 +11,8 @@ class LocalStorage{
 
   static Future<void> removeLoginInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('login_status', null);
-    await prefs.setString('login_email', null);
+    await prefs.setString('login_status','NO');
+    await prefs.setString('login_email','No');
   }
 
 }

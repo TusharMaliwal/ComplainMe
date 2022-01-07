@@ -20,94 +20,14 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isDrawerOpen = false;
 
   @override
-  Widget build(BuildContext context) {
-    if (isDrawerOpen) {
-      xOffset = MediaQuery.of(context).size.width * .6;
-      yOffset = MediaQuery.of(context).size.height * .33;
-      rotationAngle = -20 * 3.14 / 180;
-      scaleFactor = 0.6;
-      isDrawerOpen = true;
-    } else {
-      xOffset = 0;
-      yOffset = 0;
-      rotationAngle = 0;
-      scaleFactor = 1;
-      isDrawerOpen = false;
-    }
-
-    Widget iconButton = !isDrawerOpen
-        ? IconButton(
-            onPressed: () {
-              setState(() {
-                isDrawerOpen = true;
-              });
-            },
-            padding: EdgeInsets.all(10),
-            icon: Icon(
-              Icons.restaurant_menu,
-              color: kColorBlack,
-            ),
-          )
-        : IconButton(
-            onPressed: () {
-              setState(() {
-                isDrawerOpen = false;
-              });
-            },
-            padding: EdgeInsets.all(10),
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: kColorBlack,
-            ),
-          );
-
-/*     List<Widget> displayPages = [
-      SearchPage(
-        iconButton: iconButton,
+  Widget build(BuildContext context){
+    return Container(
+      child:const Center(
+        child: Text("Home Screen!",
+        textDirection:TextDirection.ltr,
+        style: TextStyle(color:Colors.black, fontSize: 30),)
       ),
-      MyOrdersScreen(
-        iconButton: iconButton,
-      ),
-      MyAddressScreen(
-        iconButton: iconButton,
-        onAddressChange: (){
-          HomeScreen(currentIndex: widget.currentIndex).createState();
-        },
-      ),
-      UpdateContactScreen(
-        iconButton: iconButton,
-      ),
-      ContactUsScreen(
-        iconButton: iconButton,
-      ),
-      HelpScreen(
-        iconButton: iconButton,
-      ),
-    ];
-
-    return SafeArea(
-      top: false,
-      child: AnimatedContainer(
-        curve: Curves.easeOut,
-        duration: Duration(milliseconds: 250),
-        transform: Matrix4.translationValues(xOffset, yOffset, 0)..scale(scaleFactor)..rotateZ(rotationAngle),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: kColorBlack.withOpacity(0.1),
-              offset: Offset(0,3),
-              blurRadius: 10,
-            ),
-          ],
-        ),
-        child: Material(
-          child: IndexedStack(
-            index: widget.currentIndex,
-            children: displayPages,
-          ),
-        ),
-      ),
+      decoration: const BoxDecoration(color: Colors.white),
     );
-  }*/
   }
 }

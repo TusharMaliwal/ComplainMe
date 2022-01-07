@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
   UserApi userApi = UserApi.instance;
 
   Future<void> loadUserDetails() async {
-    final http.Response response = await http.post(kLoadUserDetailsUrl,body: {
+    final http.Response response = await http.post(Uri.parse(kLoadUserDetailsUrl),body: {
       'email' : email,
     });
     if(response.statusCode == 200 || response.statusCode == 201){
@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> checkUserDetails() async {
-    http.Response response = await http.post(kCheckUserDetailsUrl,body :{
+    http.Response response = await http.post(Uri.parse(kCheckUserDetailsUrl),body :{
       "email" : email,
     });
     if(response.statusCode == 200 || response.statusCode == 201){
@@ -83,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       loginState = prefs.getString('login_status') ?? 'NO';
-      email = (prefs.getString('login_email') ?? null)!;
+      email = prefs.getString('login_email') ?? 'NO';
     });
     if(loginState == 'NO'){
       Navigator.pushReplacementNamed(context,LoginScreen.id);

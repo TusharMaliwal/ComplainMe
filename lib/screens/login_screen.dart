@@ -1,5 +1,8 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:convert';
 
+import 'package:complain_me/screens/otp_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
   UserApi userApi = UserApi.instance;
 
   Future<void> loadUserDetails() async {
-    final http.Response response = await http.post(kLoadUserDetailsUrl,body: {
+    final http.Response response = await http.post(Uri.parse(kLoadUserDetailsUrl),body: {
       'email' : email.text,
     });
     if(response.statusCode == 200 || response.statusCode == 201){
@@ -59,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> checkUserDetails() async {
-    http.Response response = await http.post(kCheckUserDetailsUrl,body :{
+    http.Response response = await http.post(Uri.parse(kCheckUserDetailsUrl) ,body :{
       "email" : email.text,
     });
     if(response.statusCode == 200 || response.statusCode == 201){
@@ -84,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
       'email': email.text,
       'password' : password.text,
     };
-    http.Response response = await http.post(kLoginUrl,body :(data));
+    http.Response response = await http.post(Uri.parse(kLoginUrl),body :(data));
     if(response.statusCode == 200 || response.statusCode == 201){
       // Connection established
       var message = jsonDecode(response.body.toString());
@@ -99,8 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
         // EMAIL OR PASSWORD DID NOT MATCH
         AlertBox.showErrorBox(context, 'Invalid email or password.');
       }else if(message == 'Not Verified'){
-        // EMAIL OR PASSWORD DID NOT MATCH
-        AlertBox.showErrorBox(context, 'Please verify your email address first');
+        // Credentials are correct but phone number not verified
+        Navigator.pushReplacementNamed(context, OtpScreen.id);
       }
     }else{
       // Error connecting to the server
@@ -190,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             padding: EdgeInsets.all(25),
                             color: kColorYellow,
                             child: Text(
-                              'Log In  >',
+                              'Log In  ',
                               style: TextStyle(
                                 fontFamily: 'GT Eesti',
                                 fontWeight: FontWeight.bold,

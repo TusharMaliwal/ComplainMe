@@ -8,7 +8,7 @@ const Color kColorBlack = Color(0xff000000);
 const Color kColorGrey = Color(0xffeeeeee);
 const Color kColorShadow = Color(0x03000000);
 
-const kHostUrl = 'http://192.168.43.50/complain_me-app';
+const kHostUrl = 'http://192.168.1.13/complain_me-app';
 const String kRegisterUrl = "$kHostUrl/registration.php";
 const String kLoginUrl = "$kHostUrl/login_user.php";
 const String kSaveDetailsUrl = "$kHostUrl/save_user_details.php";

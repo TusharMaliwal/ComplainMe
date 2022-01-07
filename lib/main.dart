@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
       title: 'ComplainMe App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: kColorYellow,
-        accentColor: kColorRed,
+        primaryColor: kColorYellow, 
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: kColorRed),
       ),
       initialRoute: SplashScreen.id,
       routes: {
