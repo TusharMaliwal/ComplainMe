@@ -11,42 +11,43 @@ import 'package:complain_me/utilities/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-
 class RegistrationScreen extends StatefulWidget {
-
   static final String id = 'registration_screen';
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-
   TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
   TextEditingController cnfPassword = new TextEditingController();
   bool _loading = false;
 
   Future<void> registerUser() async {
-    final http.Response response = await http.post(Uri.parse(kRegisterUrl), body: {
+    final http.Response response =
+        await http.post(Uri.parse(kRegisterUrl), body: {
       "email": email.text,
-      "password":password.text,
+      "password": password.text,
     });
 
-    if(response.statusCode == 200 || response.statusCode == 201){
+    if (response.statusCode == 200 || response.statusCode == 201) {
       // Connection established
       var data = jsonDecode(response.body.toString());
-      if(data.toString() == "User exists"){
+      if (data.toString() == "User exists") {
         AlertBox.showErrorBox(context, 'This email is already in use.');
-      }else if(data.toString() == "User registered"){
+      } else if (data.toString() == "User registered") {
         // Successful registration
 
-        await AlertBox.showSuccessBox(context, 'Your account has been registered. Please verify your email address to continue.', 'Registration Successful');
+        await AlertBox.showSuccessBox(
+            context,
+            'Your account has been registered. Please verify your email address to continue.',
+            'Registration Successful');
         Navigator.pushReplacementNamed(context, LoginScreen.id);
-
       }
-    }else{
+    } else {
       // Connection failed
-      AlertBox.showErrorBox(context, 'Error establishing connection with the server.\nError Code ${response.statusCode}');
+      AlertBox.showErrorBox(context,
+          'Error establishing connection with the server.\nError Code ${response.statusCode}');
     }
   }
 
@@ -61,7 +62,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: Scaffold(
           body: Center(
             child: SingleChildScrollView(
-              child:  Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   SizedBox(
@@ -72,7 +73,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: 40,
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 30,vertical: 0),
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 0),
                     child: Material(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -116,14 +117,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               setState(() {
                                 _loading = true;
                               });
-                              if(password.text != null && email.text != null && password.text != "" && email.text != ""){
-                                if(cnfPassword.text == password.text){
+                              if (password.text != null &&
+                                  email.text != null &&
+                                  password.text != "" &&
+                                  email.text != "") {
+                                if (cnfPassword.text == password.text) {
                                   await registerUser();
-                                }else{
-                                  AlertBox.showErrorBox(context, 'The confirmation password did not match with the chosen one.');
+                                } else if (RegExp( // checking for a valid email
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(email.text)) {
+                                  AlertBox.showErrorBox(
+                                      context, "Enter A valid Email");
+                                } else {
+                                  AlertBox.showErrorBox(context,
+                                      'The confirmation password did not match with the chosen one.');
                                 }
-                              }else{
-                                AlertBox.showErrorBox(context, 'Please fill up all the fields.');
+                              } else {
+                                AlertBox.showErrorBox(
+                                    context, 'Please fill up all the fields.');
                               }
                               setState(() {
                                 _loading = false;
@@ -158,8 +169,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 width: 2,
                               ),
                               GestureDetector(
-                                onTap: (){
-                                  Navigator.pushReplacementNamed(context, LoginScreen.id);
+                                onTap: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, LoginScreen.id);
                                 },
                                 child: Text(
                                   'Sign In',
@@ -167,8 +179,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       fontFamily: 'GT Eesti',
                                       fontWeight: FontWeight.w500,
                                       fontSize: 14,
-                                      color: kColorRed
-                                  ),
+                                      color: kColorRed),
                                 ),
                               ),
                             ],
