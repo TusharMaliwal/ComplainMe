@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:complain_me/components/alert_box.dart';
+import 'package:complain_me/screens/details_screen.dart';
 import 'package:complain_me/screens/login_screen.dart';
 import 'package:complain_me/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
 
-import 'details_screen.dart';
 
 
 
@@ -42,7 +42,6 @@ class _SplashScreenState extends State<SplashScreen> {
         AlertBox.showErrorBox(context,'Unable to load user data.');
       }else{
         userApi.name = data[0]['name'];
-        userApi.phoneNumber = int.parse(data[0]['phone_number']);
         userApi.houseName = data[0]['house_name'];
         userApi.streetName = data[0]['street_name'];
         userApi.cityName = data[0]['city_name'];
@@ -50,7 +49,6 @@ class _SplashScreenState extends State<SplashScreen> {
         userApi.postalCode = data[0]['postal_code'];
         userApi.countryName = data[0]['country_name'];
         userApi.email = data[0]['email'];
-        userApi.id = int.parse(data[0]['id']);
       }
     }else{
       // Unable to establish connection

@@ -1,14 +1,13 @@
 import 'package:complain_me/models/complain.dart';
 import 'package:flutter/material.dart';
 
-
 const Color kColorYellow = Color(0xffffc700);
 const Color kColorRed = Color(0xffff403b);
 const Color kColorBlack = Color(0xff000000);
 const Color kColorGrey = Color(0xffeeeeee);
 const Color kColorShadow = Color(0x03000000);
 
-const kHostUrl = 'http://192.168.1.13/complain_me-app';
+const kHostUrl = 'http://192.168.1.13:8000/complain_me-app';
 const String kRegisterUrl = "$kHostUrl/registration.php";
 const String kLoginUrl = "$kHostUrl/login_user.php";
 const String kSaveDetailsUrl = "$kHostUrl/save_user_details.php";
@@ -25,9 +24,11 @@ const String kGetOrdersUrl = "$kHostUrl/get_orders.php";
 const String kRemoveOrderUrl = "$kHostUrl/remove_order.php";
 const String kUpdateAddressUrl = "$kHostUrl/update_address.php";
 const String kHostDeliveryLocationUrl = "$kHostUrl/host_delivery_location.php";
-const String kReceiveDeliveryLocationUrl = "$kHostUrl/receive_delivery_location.php";
+const String kReceiveDeliveryLocationUrl =
+    "$kHostUrl/receive_delivery_location.php";
 const String kSendOtpUrl = "$kHostUrl/send_sms.php";
 const String kVerifyOtpUrl = "$kHostUrl/verify_otp.php";
+const String kValidateUrl = "$kHostUrl/validate_user.php";
 
 const TextStyle kHeadingStyle = TextStyle(
   fontFamily: 'GT Eesti',
@@ -47,10 +48,10 @@ const TextStyle kItemStyle = TextStyle(
 );
 
 const List<Complain> kCommonCategories = [
-  Complain(id: 'complain_corrupt',name: 'Corruption'),
-  Complain(id: 'complain_roads',name: 'Road Quality'),
-  Complain(id: 'complain_traffic',name: 'Traffic Problems'),
-  Complain(id: 'complain_dessert',name: 'Desserts'),
-  Complain(id: 'complain_fries',name: 'Fries'),
-  Complain(id: 'complain_shake',name: 'Shakes'),
+  Complain(id: 'complain_corrupt', name: 'Corruption'),
+  Complain(id: 'complain_roads', name: 'Road Quality'),
+  Complain(id: 'complain_traffic', name: 'Traffic Problems'),
+  Complain(id: 'complain_dessert', name: 'Desserts'),
+  Complain(id: 'complain_fries', name: 'Fries'),
+  Complain(id: 'complain_shake', name: 'Shakes'),
 ];

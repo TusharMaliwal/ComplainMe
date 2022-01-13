@@ -10,7 +10,6 @@ class UserApi {
   int ?id;
   String ?email;
   String ?name;
-  int ?phoneNumber;
   String ?houseName;
   String ?streetName;
   String ?cityName;
@@ -20,7 +19,7 @@ class UserApi {
   double ?latitude;
   double ?longitude;
 
-  UserApi({this.id, this.email, this.name, this.phoneNumber, this.houseName,
+  UserApi({this.id, this.email, this.name,this.houseName,
       this.streetName, this.cityName, this.stateName, this.postalCode,
       this.countryName,this.latitude,this.longitude});
 

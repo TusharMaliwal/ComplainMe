@@ -1,4 +1,8 @@
+import 'package:complain_me/screens/details_screen.dart';
+import 'package:complain_me/screens/details_screen2.dart';
 import 'package:complain_me/screens/login_screen.dart';
+import 'package:complain_me/screens/menu_screen.dart';
+import 'package:complain_me/screens/otp_screen.dart';
 import 'package:complain_me/screens/registration_screen.dart';
 import 'package:complain_me/screens/splashscreen.dart';
 import 'package:complain_me/utilities/constants.dart';
@@ -29,6 +33,9 @@ class MyApp extends StatelessWidget {
         SplashScreen.id: (context) => SplashScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),
+        OtpScreen.id:(context) => OtpScreen(),
+        DetailsScreen.id:(context) => DetailsScreen(),
+        MenuScreen.id:(context) => MenuScreen(),
       },
     );
   }
