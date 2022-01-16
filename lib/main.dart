@@ -1,5 +1,4 @@
 import 'package:complain_me/screens/details_screen.dart';
-import 'package:complain_me/screens/details_screen2.dart';
 import 'package:complain_me/screens/login_screen.dart';
 import 'package:complain_me/screens/menu_screen.dart';
 import 'package:complain_me/screens/otp_screen.dart';

@@ -90,7 +90,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                       fontFamily: 'GT Eesti',
                                       color: Colors.grey.shade500,
                                       fontSize: 14,
-                                    ),
+                                    )
                                   ),
                                 ],
                               ),
@@ -115,7 +115,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                             },
                                           ),
                                           DrawerItem(
-                                            label: 'My Orders',
+                                            label: 'My Complaints',
                                             icon: Icons.content_paste,
                                             onPressed: (){
                                               setState(() {

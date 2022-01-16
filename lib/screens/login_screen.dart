@@ -50,10 +50,9 @@ class _LoginScreenState extends State<LoginScreen> {
         userApi.postalCode = data[0]['postal_code'];
         userApi.countryName = data[0]['country_name'];
         userApi.email = data[0]['email'];
-        userApi.id = int.parse(data[0]['id']);
       }
     } else {
-      // Unable to establish connection
+      // Unable to establish connectionn
       AlertBox.showErrorBox(context,
           'Error establishing connection with the server.\nERROR CODE: ${response.statusCode}');
     }
@@ -108,11 +107,11 @@ class _LoginScreenState extends State<LoginScreen> {
           "email": email.text,
         });
         if (res.statusCode == 200 || res.statusCode == 201) {
-          AlertBox.showErrorBox(context, 'A link has Been Sent Please Verify Your Account.');
+          AlertBox.showErrorBox(
+              context, 'A link has Been Sent Please Verify Your Account.');
         } else {
           AlertBox.showErrorBox(context, "Please Try After Some Time.");
         }
-        
       }
     } else {
       // Error connecting to the server
