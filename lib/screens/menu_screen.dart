@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:complain_me/components/drawer_item.dart';
@@ -13,7 +12,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'login_screen.dart';
 
 class MenuScreen extends StatefulWidget {
-
   static final String id = 'menu_screen';
 
   @override
@@ -21,7 +19,6 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-
   int _currentPageIndex = 0;
   bool _loading = false;
   UserApi userApi = UserApi.instance;
@@ -32,7 +29,8 @@ class _MenuScreenState extends State<MenuScreen> {
   }
 
   Future<void> getLocation() async {
-    final query = "${userApi.houseName}, ${userApi.streetName}, ${userApi.cityName}, ${userApi.stateName} ${userApi.postalCode}, ${userApi.countryName}";
+    final query =
+        "${userApi.houseName}, ${userApi.streetName}, ${userApi.cityName}, ${userApi.stateName} ${userApi.postalCode}, ${userApi.countryName}";
     var addresses = await Geocoder.local.findAddressesFromQuery(query);
     var first = addresses.first;
     print("${first.featureName} : ${first.coordinates}");
@@ -40,162 +38,124 @@ class _MenuScreenState extends State<MenuScreen> {
     userApi.longitude = first.coordinates.longitude;
   }
 
-  @override
-  void initState() {
-    getLocation();
-    super.initState();
+  _selectedItem(int index) {
+    setState(() {
+      _currentPageIndex = index;
+      HomeScreen(
+        currentIndex: _currentPageIndex,
+      );
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
-
-    return Stack(
-      children: <Widget>[
-        ModalProgressHUD(
-          inAsyncCall: _loading,
-          color: Colors.white,
-          opacity: .5,
-          child: Material(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('images/logo.png'),
-                  fit: BoxFit.fitHeight,
-                  colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.95),BlendMode.srcATop),
-                )
-              ),
-              height: double.infinity,
-              width: double.infinity,
-              child: SafeArea(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Expanded(
-                          child: Column(
-                            children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: <Widget>[
-                                  Text(
-                                    userApi.name!,
-                                    style: kLabelStyle,
-                                  ),
-                                  Text(
-                                    userApi.email!,
-                                    style: TextStyle(
-                                      fontFamily: 'GT Eesti',
-                                      color: Colors.grey.shade500,
-                                      fontSize: 14,
-                                    )
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 40,
-                              ),
-                              Expanded(
-                                child: CustomScrollView(
-                                  slivers: <Widget>[
-                                    SliverFillRemaining(
-                                      hasScrollBody: false,
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                                        children: <Widget>[
-                                          DrawerItem(
-                                            label: 'Home',
-                                            icon: Icons.home,
-                                            onPressed: (){
-                                              setState(() {
-                                                _currentPageIndex = 0;
-                                              });
-                                            },
-                                          ),
-                                          DrawerItem(
-                                            label: 'My Complaints',
-                                            icon: Icons.content_paste,
-                                            onPressed: (){
-                                              setState(() {
-                                                _currentPageIndex = 1;
-                                              });
-                                            },
-                                          ),
-                                          DrawerItem(
-                                            label: 'My Address',
-                                            icon: Icons.location_on,
-                                            onPressed: (){
-                                              setState(() {
-                                                _currentPageIndex = 2;
-                                              });
-                                            },
-                                          ),
-                                          DrawerItem(
-                                            label: 'Update Contact',
-                                            icon: Icons.phone,
-                                            onPressed: (){
-                                              setState(() {
-                                                _currentPageIndex = 3;
-                                              });
-                                            },
-                                          ),
-                                          DrawerItem(
-                                            label: 'Contact Us',
-                                            icon: Icons.chat_bubble_outline,
-                                            onPressed: (){
-                                              setState(() {
-                                                _currentPageIndex = 4;
-                                              });
-                                            },
-                                          ),
-                                          DrawerItem(
-                                            label: 'Help',
-                                            icon: Icons.help_outline,
-                                            onPressed: (){
-                                              setState(() {
-                                                _currentPageIndex = 5;
-                                              });
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        DrawerItem(
-                          label: 'Log Out',
-                          icon: Icons.exit_to_app,
-                          onPressed: () async {
-                            setState(() {
-                              _loading = true;
-                            });
-                            await logoutUser();
-                            setState(() {
-                              _loading = false;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        HomeScreen(
+    return Scaffold(
+      appBar: AppBar(title: Text("ComplainMe")),
+      body: Center(
+        child: HomeScreen(
           currentIndex: _currentPageIndex,
         ),
-      ],
+      ),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Text(
+                    userApi.name!,
+                    style: kLabelStyle,
+                  ),
+                  Text(userApi.email!,
+                      style: TextStyle(
+                        fontFamily: 'GT Eesti',
+                        color: Colors.grey.shade500,
+                        fontSize: 14,
+                      )),
+                ],
+              ),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                setState(() {
+                  _currentPageIndex = 0;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('My Complaints'),
+              onTap: () {
+                setState(() {
+                  _currentPageIndex = 1;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('My Address'),
+              onTap: () {
+                setState(() {
+                  _currentPageIndex = 2;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Update Contact'),
+              onTap: () {
+                setState(() {
+                  _currentPageIndex = 3;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Contact Us'),
+              onTap: () {
+                setState(() {
+                  _currentPageIndex = 4;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Help'),
+              onTap: () {
+                setState(() {
+                  _currentPageIndex = 5;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Log Out'),
+              onTap: () {
+                setState(() async {
+                  setState(() {
+                    _loading = true;
+                  });
+                  await logoutUser();
+                  setState(() {
+                    _loading = false;
+                  });
+                });
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

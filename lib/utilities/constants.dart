@@ -1,4 +1,4 @@
-import 'package:complain_me/models/complain.dart';
+import 'package:complain_me/models/category.dart';
 import 'package:flutter/material.dart';
 
 const Color kColorYellow = Color(0xffffc700);
@@ -14,11 +14,11 @@ const String kSaveDetailsUrl = "$kHostUrl/save_user_details.php";
 const String kLoadUserDetailsUrl = "$kHostUrl/load_user_details.php";
 const String kCheckUserDetailsUrl = "$kHostUrl/check_user_details.php";
 const String kLoadCategoriesUrl = "$kHostUrl/load_categories.php";
-const String kLoadDishesUrl = "$kHostUrl/load_dishes.php";
-const String kLoadRestaurantsUrl = "$kHostUrl/load_restaurants.php";
-const String kMostPopularDishUrl = "$kHostUrl/load_most_popular.php";
+const String kLoadBeefsUrl = "$kHostUrl/load_dishes.php";
+const String kLoadComplainsUrl = "$kHostUrl/load_complains.php";
+const String kMostPopularBeefUrl = "$kHostUrl/load_most_popular.php";
 const String kLoadRestaurantMenuUrl = "$kHostUrl/load_restaurant_menu.php";
-const String kOpenRestaurantUrl = "$kHostUrl/load_dish_restaurant.php";
+const String kOpenComplainUrl = "$kHostUrl/load_dish_restaurant.php";
 const String kPlaceOrderUrl = "$kHostUrl/place_order.php";
 const String kGetOrdersUrl = "$kHostUrl/get_orders.php";
 const String kRemoveOrderUrl = "$kHostUrl/remove_order.php";
@@ -47,11 +47,11 @@ const TextStyle kItemStyle = TextStyle(
   fontSize: 20,
 );
 
-const List<Complain> kCommonCategories = [
-  Complain(id: 'complain_corrupt', name: 'Corruption'),
-  Complain(id: 'complain_roads', name: 'Road Quality'),
-  Complain(id: 'complain_traffic', name: 'Traffic Problems'),
-  Complain(id: 'complain_dessert', name: 'Desserts'),
-  Complain(id: 'complain_fries', name: 'Fries'),
-  Complain(id: 'complain_shake', name: 'Shakes'),
+const List<Category> kCommonCategories = [
+  Category(id: 'complain_corrupt', name: 'Corruption'),
+  Category(id: 'complain_roads', name: 'Road Quality'),
+  Category(id: 'complain_traffic', name: 'Traffic Problems'),
+  Category(id: 'complain_dessert', name: 'Desserts'),
+  Category(id: 'complain_fries', name: 'Fries'),
+  Category(id: 'complain_shake', name: 'Shakes'),
 ];
