@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # complain_me
 
 A flutter Project For filing Complaints
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# ComplainMe
+>>>>>>> b6a3ac3cd02c45be573578e861c47394f96e1aeb
