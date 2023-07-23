@@ -1,41 +1,50 @@
-import 'package:complain_me/screens/details_screen.dart';
 import 'package:complain_me/screens/login_screen.dart';
-import 'package:complain_me/screens/menu_screen.dart';
-import 'package:complain_me/screens/otp_screen.dart';
-import 'package:complain_me/screens/registration_screen.dart';
-import 'package:complain_me/screens/splashscreen.dart';
-import 'package:complain_me/utilities/constants.dart';
+import 'package:complain_me/services/local_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:complain_me/responsive/mobile_screen_layout.dart';
+import 'package:complain_me/responsive/responsive_layout_screen.dart';
+import 'package:complain_me/responsive/web_screen_layout.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorage.init();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-      ),
-    );
-
     return MaterialApp(
-      title: 'ComplainMe App',
-      debugShowCheckedModeBanner: false,
+      title: 'Complain Me',
       theme: ThemeData(
-        primaryColor: kColorYellow, 
-        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: kColorRed),
+        primarySwatch: Colors.deepPurple,
+        fontFamily: 'CarosSoft',
       ),
-      initialRoute: SplashScreen.id,
-      routes: {
-        SplashScreen.id: (context) => SplashScreen(),
-        LoginScreen.id: (context) => LoginScreen(),
-        RegistrationScreen.id: (context) => RegistrationScreen(),
-        OtpScreen.id:(context) => OtpScreen(),
-        DetailsScreen.id:(context) => DetailsScreen(),
-        MenuScreen.id:(context) => MenuScreen(),
-      },
+      debugShowCheckedModeBanner: false,
+      home: StreamBuilder(
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.hasData) {
+              return const ResponsiveLayout(
+                mobileScreenLayout: MobileScreenLayout(),
+                webScreenLayout: WebScreenLayout(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('${snapshot.error}'),
+              );
+            }
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return LoginScreen();
+        },
+      ),
     );
   }
 }

@@ -1,265 +1,210 @@
 // ignore_for_file: unnecessary_null_comparison
 
-import 'dart:convert';
-
-import 'package:complain_me/screens/details_screen.dart';
-import 'package:complain_me/screens/menu_screen.dart';
-import 'package:complain_me/screens/otp_screen.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:complain_me/responsive/mobile_screen_layout.dart';
+import 'package:complain_me/responsive/responsive_layout_screen.dart';
+import 'package:complain_me/responsive/web_screen_layout.dart';
+import 'package:complain_me/services/auth_service.dart';
+import 'package:complain_me/utilities/app_error.dart';
+import 'package:complain_me/services/local_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:complain_me/components/alert_box.dart';
 import 'package:complain_me/components/custom_text_input.dart';
 import 'package:complain_me/components/complain_me_logo.dart';
 import 'package:complain_me/screens/registration_screen.dart';
-import 'package:complain_me/services/local_storage.dart';
+
 import 'package:complain_me/utilities/constants.dart';
-import 'package:http/http.dart' as http;
-import 'package:complain_me/utilities/user_api.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class LoginScreen extends StatefulWidget {
-  static final String id = 'login_screen';
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController email = new TextEditingController();
-  TextEditingController password = new TextEditingController();
-  bool _loading = false;
-  UserApi userApi = UserApi.instance;
+  TextEditingController _emailController = new TextEditingController();
+  TextEditingController _passwordController = new TextEditingController();
+  bool _isLoading = false;
 
-  Future<void> loadUserDetails() async {
-    final http.Response response =
-        await http.post(Uri.parse(kLoadUserDetailsUrl), body: {
-      'email': email.text,
-    });
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      // Connection established
-      var data = jsonDecode(response.body.toString());
-      if (data.toString() == 'Error loading data') {
-        AlertBox.showErrorBox(context, 'Unable to load user data.');
-      } else {
-        userApi.name = data[0]['name'];
-        userApi.houseName = data[0]['house_name'];
-        userApi.streetName = data[0]['street_name'];
-        userApi.cityName = data[0]['city_name'];
-        userApi.stateName = data[0]['state_name'];
-        userApi.postalCode = data[0]['postal_code'];
-        userApi.countryName = data[0]['country_name'];
-        userApi.email = data[0]['email'];
-      }
-    } else {
-      // Unable to establish connectionn
-      AlertBox.showErrorBox(context,
-          'Error establishing connection with the server.\nERROR CODE: ${response.statusCode}');
-    }
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
   }
 
-  Future<void> checkUserDetails() async {
-    http.Response response =
-        await http.post(Uri.parse(kCheckUserDetailsUrl), body: {
-      "email": email.text,
-    });
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      // Connection established
-      var message = jsonDecode(response.body.toString());
-      if (message == 'Data Present') {
-        // User Details present
-        await loadUserDetails();
-        Navigator.pushReplacementNamed(context, MenuScreen.id);
-      } else if (message == 'Data Absent') {
-        // User Details absent
-        Navigator.pushReplacementNamed(context, DetailsScreen.id);
-      }
-    } else {
-      // Error connecting to the server
-      AlertBox.showErrorBox(
-          context, 'Error establishing connection with the server.');
-    }
-  }
-
-  Future<void> loginUser() async {
-    var data = {
-      'email': email.text,
-      'password': password.text,
-    };
-    http.Response response =
-        await http.post(Uri.parse(kLoginUrl), body: (data));
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      // Connection established
-      var message = jsonDecode(response.body.toString());
-      if (message == 'Login Success') {
-        // LOGIN SUCCESSFUL
-        LocalStorage.saveLoginInfo(
-          statusCode: 'YES',
-          email: email.text,
-        );
-        await checkUserDetails();
-      } else if (message == 'Invalid Credentials') {
-        // EMAIL OR PASSWORD DID NOT MATCH
-        AlertBox.showErrorBox(context, 'Invalid email or password.');
-      } else if (message == 'Not Verified') {
-        // Credentials are correct but account is not verified
-        http.Response res = await http.post(Uri.parse(kValidateUrl), body: {
-          "email": email.text,
-        });
-        if (res.statusCode == 200 || res.statusCode == 201) {
-          AlertBox.showErrorBox(
-              context, 'A link has Been Sent Please Verify Your Account.');
-        } else {
-          AlertBox.showErrorBox(context, "Please Try After Some Time.");
-        }
-      }
-    } else {
-      // Error connecting to the server
-      AlertBox.showErrorBox(
-          context, 'Error establishing connection with the server.');
-    }
+  void navigateToSignup() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => RegistrationScreen(),
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
-      inAsyncCall: _loading,
-      color: Colors.white,
-      opacity: .5,
-      child: SafeArea(
-        top: false,
-        child: Scaffold(
-          body: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  SizedBox(
-                    height: 40,
-                  ),
-                  ComplainMeLogo(),
-                  SizedBox(
-                    height: 60,
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 0),
-                    child: Material(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              SizedBox(
+                height: 40,
+              ),
+              ComplainMeLogo(),
+              SizedBox(
+                height: 60,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 0),
+                child: Material(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      CustomTextInput(
+                        controller: _emailController,
+                        label: 'Email',
+                        hint: 'Your Email',
+                        icon: Icons.person_outline,
+                        isPasswordField: false,
+                        textInputType: TextInputType.emailAddress,
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      CustomTextInput(
+                        controller: _passwordController,
+                        label: 'Password',
+                        hint: 'Your Password',
+                        icon: Icons.lock_outline,
+                        isPasswordField: true,
+                        textInputType: TextInputType.text,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          //TODO: CODE
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            fontFamily: 'GT Eesti',
+                            color: Colors.grey.shade400,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 60,
+                      ),
+                      MaterialButton(
+                        onPressed: () async {
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          if (_emailController.text != null &&
+                              _passwordController.text != null &&
+                              _emailController.text != "" &&
+                              _passwordController.text != "") {
+                            await loginUser();
+                          } else {
+                            AlertBox.showErrorDialog(
+                                context,
+                                AppError(400,
+                                    'Please fill up the required fields.'));
+                          }
+                          setState(() {
+                            _isLoading = false;
+                          });
+                        },
+                        padding: EdgeInsets.all(25),
+                        color: kColorYellow,
+                        child: Text(
+                          'Log In  ',
+                          style: TextStyle(
+                            fontFamily: 'GT Eesti',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          CustomTextInput(
-                            controller: email,
-                            label: 'Email',
-                            hint: 'Your Email',
-                            icon: Icons.person_outline,
-                            isPasswordField: false,
-                            textInputType: TextInputType.emailAddress,
+                          Text(
+                            'Don\'t have an account?',
+                            style: TextStyle(
+                              fontFamily: 'GT Eesti',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                            ),
                           ),
                           SizedBox(
-                            height: 25,
-                          ),
-                          CustomTextInput(
-                            controller: password,
-                            label: 'Password',
-                            hint: 'Your Password',
-                            icon: Icons.lock_outline,
-                            isPasswordField: true,
-                            textInputType: TextInputType.text,
-                          ),
-                          SizedBox(
-                            height: 15,
+                            width: 2,
                           ),
                           GestureDetector(
-                            onTap: () {
-                              //TODO: CODE
-                            },
+                            onTap: navigateToSignup,
                             child: Text(
-                              'Forgot Password?',
+                              'Sign Up',
                               style: TextStyle(
-                                fontFamily: 'GT Eesti',
-                                color: Colors.grey.shade400,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 60,
-                          ),
-                          MaterialButton(
-                            onPressed: () async {
-                              setState(() {
-                                _loading = true;
-                              });
-                              if (email.text != null &&
-                                  password.text != null &&
-                                  email.text != "" &&
-                                  password.text != "") {
-                                await loginUser();
-                              } else {
-                                AlertBox.showErrorBox(context,
-                                    'Please fill up the required fields.');
-                              }
-                              setState(() {
-                                _loading = false;
-                              });
-                            },
-                            padding: EdgeInsets.all(25),
-                            color: kColorYellow,
-                            child: Text(
-                              'Log In  ',
-                              style: TextStyle(
-                                fontFamily: 'GT Eesti',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                'Don\'t have an account?',
-                                style: TextStyle(
                                   fontFamily: 'GT Eesti',
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 2,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pushReplacementNamed(
-                                      context, RegistrationScreen.id);
-                                },
-                                child: Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                      fontFamily: 'GT Eesti',
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14,
-                                      color: kColorRed),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 40,
+                                  color: kColorRed),
+                            ),
                           ),
                         ],
                       ),
-                    ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> loginUser() async {
+    try {
+      String res = await AuthService.loginUser(
+        email: _emailController.text.trim().toLowerCase(),
+        password: _passwordController.text,
+      );
+      if (res == "Success") {
+        LocalStorage.saveLoginInfo( email:_emailController.text.trim().toLowerCase(),statusCode:"YES");
+        await AuthService().getUserDetails();
+        AlertBox.showSuccessDialog(context, res);
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const ResponsiveLayout(
+                mobileScreenLayout: MobileScreenLayout(),
+                webScreenLayout: WebScreenLayout()),
+          ),
+        );
+      } else {
+        AlertBox.showErrorDialog(
+          context,
+          AppError(400, res),
+        );
+      }
+    } on AppError catch (e) {
+      await AlertBox.showErrorDialog(
+        context,
+        AppError(
+          400,
+          e.message,
+        ),
+      );
+    }
   }
 }

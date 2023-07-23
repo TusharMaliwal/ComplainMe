@@ -1,87 +1,145 @@
-import 'package:flutter/material.dart';
+import 'package:complain_me/components/custom_button.dart';
+import 'package:complain_me/utilities/app_error.dart';
 import 'package:complain_me/utilities/constants.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:flutter/material.dart';
+
 
 class AlertBox {
-  static void showErrorBox(BuildContext context, String text) {
-    Alert(
+  static Future<void> showErrorDialog(
+      BuildContext context, AppError error) async {
+    await showDialog(
       context: context,
-      type: AlertType.error,
-      title: "Error",
-      desc: text,
-      buttons: [
-        DialogButton(
-          child: Text(
-            "Okay",
-            style: TextStyle(
-                fontFamily: 'GT Eesti', color: kColorBlack, fontSize: 16),
+      builder: (context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text(
+                'Error!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: kColorRed,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+              ),
+              kSpace30Ver,
+              Text(error.message),
+            ],
           ),
-          color: kColorYellow,
-          onPressed: () => Navigator.pop(context),
-          width: 120,
-        )
-      ],
-    ).show();
+          actionsAlignment: MainAxisAlignment.spaceEvenly,
+          actions: [
+            CustomButton(
+              text: 'Okay',
+              color: kColorPrimary,
+              textColor: kColorLight,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
-  static Future<void> showSuccessBox(BuildContext context,String text,String title) async {
-    await Alert(
+  static Future<void> showSuccessDialog(
+      BuildContext context, String message) async {
+    await showDialog(
       context: context,
-      type: AlertType.success,
-      title: title,
-      desc: text,
-      buttons: [
-        DialogButton(
-          color: kColorYellow,
-          child: Text(
-            "Okay",
-            style: TextStyle(
-                fontFamily: 'GT Eesti',
-                color: kColorBlack,
-                fontSize: 16),
+      builder: (context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text(
+                'Success',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: kColorRed,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+              ),
+              kSpace30Ver,
+              Text(message),
+            ],
           ),
-          onPressed: () => Navigator.pop(context),
-          width: 120,
-        )
-      ],
-    ).show();
+          actionsAlignment: MainAxisAlignment.spaceEvenly,
+          actions: [
+            CustomButton(
+              text: 'Okay',
+              color: kColorPrimary,
+              textColor: kColorLight,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
-  static Future<void> showConfirmationBox(BuildContext context,String title,Function onContinue) async {
-    await Alert(
+  static Future<bool> showConfirmationDialog(
+      BuildContext context, String title, String message) async {
+    bool sure = false;
+
+    // await showDialog(
+    //   context: context,
+    //   builder: (context) {
+    //     return Container();
+    //   },
+    // );
+
+    await showDialog(
       context: context,
-      type: AlertType.warning,
-      title: title,
-      desc: 'Are you sure? Click okay to continue',
-      buttons: [
-        DialogButton(
-          color: kColorYellow,
-          child: Text(
-            "Cancel",
-            style: TextStyle(
-                fontFamily: 'GT Eesti',
-                color: kColorBlack,
-                fontSize: 16),
+      builder: (context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: kColorRed,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+              ),
+              kSpace30Ver,
+              Text(message),
+            ],
           ),
-          onPressed: () => Navigator.pop(context),
-          width: 120,
-        ),
-        DialogButton(
-          color: kColorYellow,
-          child: Text(
-            "Okay",
-            style: TextStyle(
-                fontFamily: 'GT Eesti',
-                color: kColorBlack,
-                fontSize: 16),
-          ),
-          onPressed: (){
-            Navigator.pop(context);
-            onContinue();
-          } ,
-          width: 120,
-        )
-      ],
-    ).show();
+          actionsAlignment: MainAxisAlignment.spaceEvenly,
+          actions: [
+            CustomButton(
+              text: 'Cancel',
+              color: kColorPrimary,
+              textColor: kColorLight,
+              onPressed: () {
+                sure = false;
+                Navigator.pop(context);
+              },
+            ),
+            CustomButton(
+              text: 'Yes',
+              color: kColorPrimary,
+              textColor: kColorLight,
+              onPressed: () {
+                sure = true;
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+
+    return sure;
   }
 }

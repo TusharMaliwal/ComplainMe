@@ -1,17 +1,26 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocalStorage{
+class LocalStorage {
+  static late SharedPreferences _preferences;
+  static init() async {
+    _preferences = await SharedPreferences.getInstance();
+  }
 
-  static Future<void> saveLoginInfo({required String statusCode,required String email}) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('login_status', statusCode);
-    await prefs.setString('login_email', email);
+  static Future<void> saveLoginInfo(
+      {required String statusCode, required String email}) async {
+    await _preferences.setString('login_status', statusCode);
+    await _preferences.setString('login_email', email);
   }
 
   static Future<void> removeLoginInfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('login_status','NO');
-    await prefs.setString('login_email','No');
+    await _preferences.setString('login_status', 'NO');
+    await _preferences.setString('login_email', 'No');
+  }
+
+  static Future<void> saveUserDetails({required String username,required String image})async{
+    await _preferences.setString('username',username);
+    await _preferences.setString('profileImage', image);
+    //await _preferences.set
   }
 
 }

@@ -1,4 +1,4 @@
-import 'package:complain_me/models/category.dart';
+
 import 'package:flutter/material.dart';
 
 const Color kColorYellow = Color(0xffffc700);
@@ -6,18 +6,42 @@ const Color kColorRed = Color(0xffff403b);
 const Color kColorBlack = Color(0xff000000);
 const Color kColorGrey = Color(0xffeeeeee);
 const Color kColorShadow = Color(0x03000000);
+const Color kColorWhite = Color(0xFFFFFFFF);
+const Color kColorLight = Color(0xFFEFDCF9);
+const Color kColorDark = Color(0xFF323E42);
+const Color kColorPrimary = Color(0xFFC55FFC);
+const Color kColorPrimaryDark = Color(0xFF7954A1);
 
-const kHostUrl = 'http://192.168.1.13:8000/complain_me-app';
-const String kRegisterUrl = "$kHostUrl/registration.php";
+const kSpace10Ver = SizedBox(
+  height: 10,
+);
+
+const kSpace30Ver = SizedBox(
+  height: 30,
+);
+
+const kSpace50Ver = SizedBox(
+  height: 50,
+);
+
+const kSpace10Hor = SizedBox(
+  width: 10,
+);
+
+
+
+const kHostUrl = 'http://10.0.1.84:8000/complain_me-app';
+const String kRegisterUrl = "$kHostUrl/save_user_details.php";
 const String kLoginUrl = "$kHostUrl/login_user.php";
-const String kSaveDetailsUrl = "$kHostUrl/save_user_details.php";
+//const String kSaveDetailsUrl = "$kHostUrl/save_user_details.php";
 const String kLoadUserDetailsUrl = "$kHostUrl/load_user_details.php";
+
 const String kCheckUserDetailsUrl = "$kHostUrl/check_user_details.php";
-const String kLoadCategoriesUrl = "$kHostUrl/load_categories.php";
-const String kLoadBeefsUrl = "$kHostUrl/load_dishes.php";
-const String kLoadComplainsUrl = "$kHostUrl/load_complains.php";
-const String kMostPopularBeefUrl = "$kHostUrl/load_most_popular.php";
-const String kLoadRestaurantMenuUrl = "$kHostUrl/load_restaurant_menu.php";
+const String kLoadPostUrl = "$kHostUrl/load_posts.php";
+const String kRemovePostLikeUrl = "$kHostUrl/remove_post_like.php";
+const String kLikePostUrl = "$kHostUrl/like_post.php";
+const String kDeletePostUrl = "$kHostUrl/delete_post.php";
+const String kUploadPostUrl = "$kHostUrl/upload_post.php";
 const String kOpenComplainUrl = "$kHostUrl/load_dish_restaurant.php";
 const String kPlaceOrderUrl = "$kHostUrl/place_order.php";
 const String kGetOrdersUrl = "$kHostUrl/get_orders.php";
@@ -47,11 +71,3 @@ const TextStyle kItemStyle = TextStyle(
   fontSize: 20,
 );
 
-const List<Category> kCommonCategories = [
-  Category(id: 'complain_corrupt', name: 'Corruption'),
-  Category(id: 'complain_roads', name: 'Road Quality'),
-  Category(id: 'complain_traffic', name: 'Traffic Problems'),
-  Category(id: 'complain_dessert', name: 'Desserts'),
-  Category(id: 'complain_fries', name: 'Fries'),
-  Category(id: 'complain_shake', name: 'Shakes'),
-];

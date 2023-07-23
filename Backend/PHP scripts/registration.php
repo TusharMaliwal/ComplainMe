@@ -17,7 +17,7 @@ if($num_rows >= 1){
     {
         //User registered
         echo json_encode("User registered");
-        $to = $email;
+/*         $to = $email;
         $subject = 'Email Verification for ComplainMe App';
         $message = "<a href='http://192.168.1.13:8000/complain_me-app/verify.php?vkey=$vkey'>http://192.168.1.13/complain_me-app/verify.php?vkey=$vkey</a>
 		    <a> If You can't Open this link Then Paste This link in Your Browser</a>";
@@ -25,7 +25,7 @@ if($num_rows >= 1){
         $headers .= "MIME-Version: 1.0"."\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8"."\r\n";
         
-        mail($to,$subject,$message,$headers);
+        mail($to,$subject,$message,$headers); */
     }
 }
 ?>
