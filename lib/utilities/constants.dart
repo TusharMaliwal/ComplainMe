@@ -33,7 +33,6 @@ const kSpace10Hor = SizedBox(
 const kHostUrl = 'http://10.0.1.84:8000/complain_me-app';
 const String kRegisterUrl = "$kHostUrl/save_user_details.php";
 const String kLoginUrl = "$kHostUrl/login_user.php";
-//const String kSaveDetailsUrl = "$kHostUrl/save_user_details.php";
 const String kLoadUserDetailsUrl = "$kHostUrl/load_user_details.php";
 
 const String kCheckUserDetailsUrl = "$kHostUrl/check_user_details.php";
@@ -42,8 +41,8 @@ const String kRemovePostLikeUrl = "$kHostUrl/remove_post_like.php";
 const String kLikePostUrl = "$kHostUrl/like_post.php";
 const String kDeletePostUrl = "$kHostUrl/delete_post.php";
 const String kUploadPostUrl = "$kHostUrl/upload_post.php";
-const String kOpenComplainUrl = "$kHostUrl/load_dish_restaurant.php";
-const String kPlaceOrderUrl = "$kHostUrl/place_order.php";
+const String kLoadCommentsUrl = "$kHostUrl/load_comment_post.php";
+const String kPostCommentUrl = "$kHostUrl/post_comment.php";
 const String kGetOrdersUrl = "$kHostUrl/get_orders.php";
 const String kRemoveOrderUrl = "$kHostUrl/remove_order.php";
 const String kUpdateAddressUrl = "$kHostUrl/update_address.php";
@@ -53,6 +52,9 @@ const String kReceiveDeliveryLocationUrl =
 const String kSendOtpUrl = "$kHostUrl/send_sms.php";
 const String kVerifyOtpUrl = "$kHostUrl/verify_otp.php";
 const String kValidateUrl = "$kHostUrl/validate_user.php";
+
+const String kProfImageUrl = "$kHostUrl/Profilepics/";
+const String kPostImageUrl = "$kHostUrl/PostPics/";
 
 const TextStyle kHeadingStyle = TextStyle(
   fontFamily: 'GT Eesti',

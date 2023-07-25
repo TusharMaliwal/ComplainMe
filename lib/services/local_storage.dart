@@ -17,10 +17,4 @@ class LocalStorage {
     await _preferences.setString('login_email', 'No');
   }
 
-  static Future<void> saveUserDetails({required String username,required String image})async{
-    await _preferences.setString('username',username);
-    await _preferences.setString('profileImage', image);
-    //await _preferences.set
-  }
-
 }

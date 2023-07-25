@@ -13,7 +13,6 @@ $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
 if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
     $query = "INSERT INTO user_post VALUES('$postID','$username','$fileName','$description','$datePublished')";
-    echo $query;
     $results = mysqli_query($connect, $query);
     if($results>0)
         echo json_encode("SUCCESS");

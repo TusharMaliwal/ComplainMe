@@ -1,30 +1,33 @@
 import 'dart:convert';
 
 import 'package:complain_me/models/user_model.dart';
-import 'package:complain_me/services/local_storage.dart';
 import 'package:complain_me/utilities/constants.dart';
+import 'package:complain_me/utilities/user_api.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
-
 class AuthService {
 
-    Future<void> getUserDetails()async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Future<void> getUserDetails({required String email})async{
+    UserApi userApi = UserApi.instance;
     var url = Uri.parse(kLoadUserDetailsUrl);
-
     var request = http.MultipartRequest('POST', url);
     request.fields.addAll({
-      'email': prefs.getString('login_email')!,
+      'email': email,
     });
 
     var streamedresponse = await request.send();
     var response = await http.Response.fromStream(streamedresponse);
     var data  = jsonDecode(response.body.toString());
-    await LocalStorage.saveUserDetails(username:data[0]['username'],image:data[0]['image']);
-
+    userApi.lname = data[0]['lname'];
+    userApi.fname = data[0]['fname'];
+    userApi.email = data[0]['email'];
+    userApi.username = data[0]['username'];
+    userApi.bio = data[0]['bio'];
+    userApi.profImage = data[0]['profImage'];
   }
 
+
   static Future<String> signupUser(User user) async {
+    UserApi userApi = UserApi.instance;
     var url = Uri.parse(kRegisterUrl);
 
     var request = http.MultipartRequest('POST', url);
@@ -49,6 +52,12 @@ class AuthService {
       'password': user.password!,
       'username': user.username!,
     });
+    userApi.lname = user.lastName!;
+    userApi.fname = user.firstName;
+    userApi.email = user.email!;
+    userApi.username = user.username!;
+    userApi.bio = user.bio!;
+    userApi.profImage = user.username!;
 
     var streamedresponse = await request.send();
     var response = await http.Response.fromStream(streamedresponse);
@@ -58,6 +67,7 @@ class AuthService {
       return message;
     }
     return "No connection";
+
   }
 
   static Future<String> loginUser({

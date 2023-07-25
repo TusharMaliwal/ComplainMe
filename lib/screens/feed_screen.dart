@@ -1,6 +1,5 @@
 import 'package:complain_me/components/complain_me_logo.dart';
 import 'package:complain_me/components/post_card.dart';
-import 'package:complain_me/models/post_model.dart';
 import 'package:complain_me/services/post_service.dart';
 import 'package:complain_me/utilities/constants.dart';
 import 'package:flutter/material.dart';

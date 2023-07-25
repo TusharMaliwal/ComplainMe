@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,5 +14,6 @@ pickImage(ImageSource source) async {
 
 getProfileImage() async {
     SharedPreferences _preferences = await SharedPreferences.getInstance();
-    return _preferences.getString('profileImage') as Uint8List;
+    return _preferences.getString('profileImage');
   }
+

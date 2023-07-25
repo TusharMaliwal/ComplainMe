@@ -1,16 +1,13 @@
-// ignore_for_file: await_only_futures
-
 import 'dart:typed_data';
-
 import 'package:complain_me/components/alert_box.dart';
 import 'package:complain_me/models/post_model.dart';
 import 'package:complain_me/services/post_service.dart';
 import 'package:complain_me/utilities/app_error.dart';
 import 'package:complain_me/utilities/constants.dart';
+import 'package:complain_me/utilities/user_api.dart';
 import 'package:complain_me/utilities/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({Key? key}) : super(key: key);
@@ -22,21 +19,17 @@ class AddPostScreen extends StatefulWidget {
 class _AddPostScreenState extends State<AddPostScreen> {
   Uint8List? _file;
   final TextEditingController _descriptionController = TextEditingController();
+  UserApi userApi = UserApi.instance;
   bool _isLoading = false;
-  String? _profilepic;
   void postImage() async {
     setState(() {
       _isLoading = true;
     });
     try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      setState(() {
-        _profilepic = prefs.getString('image');
-      });
-
+      print("Username is :"+userApi.username!);
       String res = await PostService().uploadPost(
         Post(
-          username: prefs.getString('username'),
+          username: userApi.username!,
           //profileImage: await getProfileImage(),
           description: _descriptionController.text,
           postImage: _file!,
@@ -126,6 +119,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
     });
   }
 
+  
+
   @override
   void dispose() {
     super.dispose();
@@ -181,7 +176,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   children: [
                     CircleAvatar(
                       backgroundImage: NetworkImage(
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVr0nG5xu2A9nK0Ub-93V8rjF8GonraFe4v4JZTF8&s' //"C:\xampp\htdocs\complain_me-app\Profilepics"+_profilepic!
+                           kProfImageUrl + userApi.username!
                           ),
                     ),
                     SizedBox(

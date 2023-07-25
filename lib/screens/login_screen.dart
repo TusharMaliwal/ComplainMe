@@ -182,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       if (res == "Success") {
         LocalStorage.saveLoginInfo( email:_emailController.text.trim().toLowerCase(),statusCode:"YES");
-        await AuthService().getUserDetails();
+        await AuthService().getUserDetails(email:_emailController.text.trim().toLowerCase());
         AlertBox.showSuccessDialog(context, res);
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(

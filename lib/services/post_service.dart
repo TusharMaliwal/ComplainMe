@@ -21,7 +21,7 @@ class PostService {
         'file',
         Stream.value(List<int>.from(post.postImage!)), 
         post.postImage!.length,
-        filename: post.username!//+ post.datePublished!,
+        filename: post.username!+ post.datePublished!,
       ));
       
       request.headers.addAll(requestHeaders);
@@ -63,20 +63,19 @@ class PostService {
         likes.add(username);
         url = Uri.parse(kLikePostUrl);
       }
-      var requestHeaders = {
-        'Content-Type': 'application/json',
-      };
+      var request = http.MultipartRequest('POST', url);
 
-      var requestBody = jsonEncode({
+      var requestHeaders = {
+        'Content-Type': 'multipart/form-data',
+      };
+      request.headers.addAll(requestHeaders);
+      request.fields.addAll({
         'username': username,
         'postID': postID,
       });
-
-      await http.post(
-        url,
-        headers: requestHeaders,
-        body: requestBody,
-      );
+      var streamedresponse = await request.send();
+      var response = await http.Response.fromStream(streamedresponse);
+      print(jsonDecode(response.body.toString()));
     } catch (e) {
       print(e.toString());
     }
@@ -86,19 +85,16 @@ class PostService {
     try {
       var url = Uri.parse(kDeletePostUrl);
 
-      var requestHeaders = {
-        'Content-Type': 'application/json',
-      };
+      var request = http.MultipartRequest('POST', url);
 
-      var requestBody = jsonEncode({
+      var requestHeaders = {
+        'Content-Type': 'multipart/form-data',
+      };
+      request.headers.addAll(requestHeaders);
+      request.fields.addAll({
         'postID': postID,
       });
-
-      await http.post(
-        url,
-        headers: requestHeaders,
-        body: requestBody,
-      );
+      await request.send();
     } catch (e) {
       print(e.toString());
     }
@@ -110,6 +106,47 @@ class PostService {
       var response = await http.get(url);
       var data  = jsonDecode(response.body.toString());
       return data;
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  getComments(String postID) async{
+    try {
+      var url = Uri.parse(kLoadCommentsUrl);
+      var request = http.MultipartRequest('POST', url);
+
+      var requestHeaders = {
+        'Content-Type': 'multipart/form-data',
+      };
+      request.headers.addAll(requestHeaders);
+      request.fields.addAll({
+        'postID': postID,
+      });
+      var streamedresponse = await request.send();
+      var response = await http.Response.fromStream(streamedresponse);
+      var data  = jsonDecode(response.body.toString());
+      return data;
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  postComment(String postID, String text, String username) async{
+    try {
+      var url = Uri.parse(kPostCommentUrl);
+      var request = http.MultipartRequest('POST', url);
+
+      var requestHeaders = {
+        'Content-Type': 'multipart/form-data',
+      };
+      request.headers.addAll(requestHeaders);
+      request.fields.addAll({
+        'postID': postID,
+        'comment':text,
+        'username':username,
+      });
+      await request.send();
     } catch (e) {
       print(e.toString());
     }
