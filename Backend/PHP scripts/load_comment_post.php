@@ -6,9 +6,9 @@ $res = array();
 if($sql){
     while($row=$sql->fetch_assoc()){
         $sql1 = mysqli_query($connect,"select * from user_details where username='$row[username]'");
-        $details= array();
+        $details= '';
         while($row1=$sql1->fetch_assoc()){
-            $details[]=$row1;
+            $details=$row1;
         }
         $res[]=$row+$details;
     }

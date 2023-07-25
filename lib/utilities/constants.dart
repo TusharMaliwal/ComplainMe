@@ -11,7 +11,7 @@ const Color kColorLight = Color(0xFFEFDCF9);
 const Color kColorDark = Color(0xFF323E42);
 const Color kColorPrimary = Color(0xFFC55FFC);
 const Color kColorPrimaryDark = Color(0xFF7954A1);
-
+const mobileBackgroundColor = Color.fromRGBO(0, 0, 0, 1);
 const kSpace10Ver = SizedBox(
   height: 10,
 );
@@ -43,13 +43,13 @@ const String kDeletePostUrl = "$kHostUrl/delete_post.php";
 const String kUploadPostUrl = "$kHostUrl/upload_post.php";
 const String kLoadCommentsUrl = "$kHostUrl/load_comment_post.php";
 const String kPostCommentUrl = "$kHostUrl/post_comment.php";
-const String kGetOrdersUrl = "$kHostUrl/get_orders.php";
-const String kRemoveOrderUrl = "$kHostUrl/remove_order.php";
-const String kUpdateAddressUrl = "$kHostUrl/update_address.php";
-const String kHostDeliveryLocationUrl = "$kHostUrl/host_delivery_location.php";
-const String kReceiveDeliveryLocationUrl =
-    "$kHostUrl/receive_delivery_location.php";
-const String kSendOtpUrl = "$kHostUrl/send_sms.php";
+const String kLoadUserPostsUrl = "$kHostUrl/load_user_posts.php";
+const String kLoadUserDataUrl = "$kHostUrl/load_user_data.php";//can be any other user
+const String kunfollowUserUrl = "$kHostUrl/unfollow_user.php";
+const String kfollowUserUrl = "$kHostUrl/follow_user.php";
+const String kSearchUserUrl =
+    "$kHostUrl/search_user.php";
+const String kgetTotalPostsUrl = "$kHostUrl/total_posts.php";
 const String kVerifyOtpUrl = "$kHostUrl/verify_otp.php";
 const String kValidateUrl = "$kHostUrl/validate_user.php";
 

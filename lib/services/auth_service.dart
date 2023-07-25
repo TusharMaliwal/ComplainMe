@@ -92,5 +92,7 @@ class AuthService {
     return "No connection";
   }
 
+  signOut() {}
+
 
 }

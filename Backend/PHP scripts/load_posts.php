@@ -1,4 +1,3 @@
-//loading post details and likes and number of comments
 <?php
 include "config.php"; 
 $sql = mysqli_query($connect,"select * from user_post");
@@ -12,7 +11,7 @@ if($sql){
         }
         $sql1 = mysqli_query($connect,"select * from user_comments where postID='$row[postID]'");
 	$num_rows = mysqli_num_rows($sql1);
-        $res[]=$row+array("likes"=>$like) + array("comments"=>$num_rows);
+        $res[]=$row+array("likes"=>$like) + array("commentLength"=>$num_rows);
     }
     echo json_encode($res);
 }else{

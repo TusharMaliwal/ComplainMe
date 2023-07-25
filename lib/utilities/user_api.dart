@@ -11,7 +11,6 @@ class UserApi {
   String? lname;
   String? fname;
   String? username;
-
   String? profImage;
   String? bio;
 

@@ -26,7 +26,7 @@ class ComplainMeLogo extends StatelessWidget {
             decoration: TextDecoration.none,
             fontFamily: 'GT Eesti',
             color: kColorBlack,
-            fontSize: 36,
+            fontSize: 30,
           ),
         ),
       ],

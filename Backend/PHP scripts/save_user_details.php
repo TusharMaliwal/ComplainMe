@@ -13,7 +13,6 @@ $fileName = basename($_FILES["file"]["name"]);
 $targetFilePath = $targetDir . $fileName;
 $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
-
 $allowTypes = array('jpg','png','jpeg','gif');
 //if(in_array($fileType, $allowTypes)){
     // Upload file to server

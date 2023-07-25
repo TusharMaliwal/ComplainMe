@@ -23,7 +23,7 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: kColorShadow,
+      color: kColorGrey,
       padding: EdgeInsets.symmetric(
         vertical: 10,
       ),
@@ -115,7 +115,7 @@ class _PostCardState extends State<PostCard> {
               alignment: Alignment.center,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height + 0.35,
+                  height: 350,
                   width: double.infinity,
                   child: Image.network(
                     kPostImageUrl+widget.snap['postImage'],
@@ -159,6 +159,9 @@ class _PostCardState extends State<PostCard> {
                       userApi.username!,
                       widget.snap['likes'],
                     );
+                    widget.snap['likes'].contains(userApi.username!)?
+                    widget.snap['likes'].add(userApi.username!):
+                    widget.snap['likes'].remove(userApi.username!);
                   },
                   icon: widget.snap['likes'].contains(userApi.username!)
                       ? const Icon(

@@ -54,7 +54,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       String res = await AuthService.signupUser(user);
       print(res);
       if (res == "SUCCESS") {
-        LocalStorage.saveLoginInfo( email:_emailController.text.trim().toLowerCase(),statusCode:"YES");
+        LocalStorage.saveLoginInfo(
+            email: _emailController.text.trim().toLowerCase(),
+            statusCode: "YES");
         AlertBox.showSuccessDialog(context, res);
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
@@ -96,7 +98,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               SizedBox(
                 height: 20,
               ),
-              //ComplainMeLogo(),
+
               SizedBox(
                 height: 20,
               ),
@@ -108,32 +110,38 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Stack(
+                      Row(
                         children: [
-                          _image != null
-                              ? CircleAvatar(
-                                  radius: 64,
-                                  backgroundImage: MemoryImage(_image!),
-                                )
-                              : const CircleAvatar(
-                                  radius: 64,
-                                  backgroundImage: NetworkImage(
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVr0nG5xu2A9nK0Ub-93V8rjF8GonraFe4v4JZTF8&s'),
+                          Stack(
+                            children: [
+                              _image != null
+                                  ? CircleAvatar(
+                                      radius: 56,
+                                      backgroundImage: MemoryImage(_image!),
+                                    )
+                                  : const CircleAvatar(
+                                      radius: 56,
+                                      backgroundImage: NetworkImage(
+                                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVr0nG5xu2A9nK0Ub-93V8rjF8GonraFe4v4JZTF8&s'),
+                                    ),
+                              Positioned(
+                                bottom: -10,
+                                left: 80,
+                                child: IconButton(
+                                  onPressed: selectImage,
+                                  icon: const Icon(Icons.add_a_photo),
                                 ),
-                          Positioned(
-                              bottom: -10,
-                              left: 80,
-                              child: IconButton(
-                                onPressed: selectImage,
-                                icon: const Icon(Icons.add_a_photo),
-                              )),
+                              ),
+                            ],
+                          ),
+                          ComplainMeLogo(),
                         ],
                       ),
 
                       CustomTextInput(
                         controller: _firstNameController,
                         label: 'FirstName',
-                        hint: 'Fisrt Name',
+                        hint: 'First Name',
                         icon: Icons.person_outline,
                         isPasswordField: false,
                         textInputType: TextInputType.text,

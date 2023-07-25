@@ -56,11 +56,9 @@ class PostService {
       var url;
       //remove Like
       if (likes.contains(username)) {
-        likes.remove(username);
         url = Uri.parse(kRemovePostLikeUrl);
       } else {
         //like
-        likes.add(username);
         url = Uri.parse(kLikePostUrl);
       }
       var request = http.MultipartRequest('POST', url);

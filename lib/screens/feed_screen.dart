@@ -1,4 +1,3 @@
-import 'package:complain_me/components/complain_me_logo.dart';
 import 'package:complain_me/components/post_card.dart';
 import 'package:complain_me/services/post_service.dart';
 import 'package:complain_me/utilities/constants.dart';
@@ -11,9 +10,9 @@ class FeedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kColorPrimary,
+        backgroundColor: kColorDark,
         centerTitle: false,
-        title: ComplainMeLogo(),
+        title: Text("ComplainMe"),
         actions: [
           IconButton(
             onPressed: () {},
