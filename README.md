@@ -1,20 +1,36 @@
-
 # complain_me
 
-A flutter Project For filing Complaints
+A flutter Project For  a social Media app like Instagram
 
-## Getting Started
+## Tech Stack
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/TechStack/flutter-logo.png" width="250px">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/TechStack/dart-logo.png" width="250px">
+This app is created using flutter (dart). The UI and main functioning of the app is achieved through dart. This app uses MySQL database for storing the necessary data. The server provider is Apache deployed with PHP scripts for handling specific tasks.
+<br>
+<br>
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/TechStack/mysql-logo.png" width="250px">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/TechStack/php-logo.png" width="250px">
+<br>
+For this application, I created a localhost server using Xampp.
+<br>
+<br>
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/TechStack/xampp-logo.png" width="80px">
 
-This project is a starting point for a Flutter application.
+##Flutter Packages Used
+ 1. **http**
+ 2. **shared_preferences**
+ 3. **rflutter_alert**
+ 4. **cupertino_icons**
+ 5. **url_launcher**
+ 6. **intl**
+ 7. **font_awesome_flutter**
+ 8. **image_picker**
+ 9. **flutter_staggered_grid_view**
 
-A few resources to get you started if this is your first Flutter project:
+## App Mock-ups
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/LoginScreen.png">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/UploadScreen.png">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/FeedScreen.png">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/SearchScreen.png">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/ProfileScreen.png">
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# ComplainMe
->>>>>>> b6a3ac3cd02c45be573578e861c47394f96e1aeb
