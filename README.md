@@ -28,9 +28,9 @@ For this application, I created a localhost server using Xampp.
  9. **flutter_staggered_grid_view**
 
 ## App Mock-ups
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/LoginScreen.png">
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/UploadScreen.png">
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/FeedScreen.png">
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/SearchScreen.png">
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/ProfileScreen.png">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/LoginScreen.jpg">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/UploadScreen.jpg">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/FeedScreen.jpg">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/SearchScreen.jpg">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/ProfileScreen.jpg">
 
