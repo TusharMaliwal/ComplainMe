@@ -3,8 +3,8 @@
 A flutter Project For  a social Media app like Instagram
 
 ## Tech Stack
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/TechStack/flutter-logo.png" width="250px">
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/TechStack/dart-logo.png" width="250px">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/main/TechStack/flutter-logo.png" width="250px">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/main/TechStack/dart-logo.png" width="250px">
 This app is created using flutter (dart). The UI and main functioning of the app is achieved through dart. This app uses MySQL database for storing the necessary data. The server provider is Apache deployed with PHP scripts for handling specific tasks.
 <br>
 <br>
@@ -14,7 +14,7 @@ This app is created using flutter (dart). The UI and main functioning of the app
 For this application, I created a localhost server using Xampp.
 <br>
 <br>
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/TechStack/xampp-logo.png" width="80px">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/main/TechStack/xampp-logo.png" width="80px">
 
 ##Flutter Packages Used
  1. **http**
