@@ -8,8 +8,8 @@ A flutter Project For  a social Media app like Instagram
 This app is created using flutter (dart). The UI and main functioning of the app is achieved through dart. This app uses MySQL database for storing the necessary data. The server provider is Apache deployed with PHP scripts for handling specific tasks.
 <br>
 <br>
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/TechStack/mysql-logo.png" width="250px">
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/TechStack/php-logo.png" width="250px">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/main/TechStack/mysql-logo.png" width="250px">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/main/TechStack/php-logo.png" width="250px">
 <br>
 For this application, I created a localhost server using Xampp.
 <br>
@@ -28,9 +28,9 @@ For this application, I created a localhost server using Xampp.
  9. **flutter_staggered_grid_view**
 
 ## App Mock-ups
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/LoginScreen.jpg">
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/UploadScreen.jpg">
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/FeedScreen.jpg">
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/SearchScreen.jpg">
-<img src="https://github.com/TusharMaliwal/ComplainMe/blob/master/AppScreenshots/ProfileScreen.jpg">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/main/AppScreenshots/LoginScreen.jpg">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/main/AppScreenshots/UploadScreen.jpg">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/main/AppScreenshots/FeedScreen.jpg">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/main/AppScreenshots/SearchScreen.jpg">
+<img src="https://github.com/TusharMaliwal/ComplainMe/blob/main/AppScreenshots/ProfileScreen.jpg">
 
